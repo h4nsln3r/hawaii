@@ -1,8 +1,9 @@
+// app/cart/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { Product } from "../types";
-import { getCart, removeFromCart, clearCart } from "../lib/cart";
+import { getCart, addToCart, removeFromCart, clearCart } from "../lib/cart";
 import { useRouter } from "next/navigation";
 
 export default function CartPage() {
@@ -13,7 +14,12 @@ export default function CartPage() {
     setCart(getCart());
   }, []);
 
-  const handleRemove = (productId: number) => {
+  const handleIncrease = (product: Product) => {
+    addToCart(product);
+    setCart(getCart());
+  };
+
+  const handleDecrease = (productId: number) => {
     removeFromCart(productId);
     setCart(getCart());
   };
@@ -23,6 +29,11 @@ export default function CartPage() {
     alert("Tack för ditt köp!");
     router.push("/");
   };
+
+  const totalPrice = cart.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
 
   return (
     <div className="container mx-auto p-4">
@@ -38,15 +49,24 @@ export default function CartPage() {
                 <span>
                   {item.name} - {item.price} kr (x{item.quantity})
                 </span>
-                <button
-                  onClick={() => handleRemove(item.id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                >
-                  Ta bort
-                </button>
+                <div>
+                  <button
+                    onClick={() => handleDecrease(item.id)}
+                    className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 mx-1"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => handleIncrease(item)}
+                    className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 mx-1"
+                  >
+                    +
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
+          <div className="mt-4 text-xl font-bold">Total: {totalPrice} kr</div>
           <div className="mt-4">
             <button
               onClick={handleCheckout}
