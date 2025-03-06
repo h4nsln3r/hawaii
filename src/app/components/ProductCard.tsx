@@ -4,13 +4,13 @@
 import { FC } from "react";
 import { Product } from "../types";
 import Link from "next/link";
+import { addToCart } from "../lib/cart";
 
 interface Props {
   product: Product;
-  addToCart: (product: Product) => void;
 }
 
-const ProductCard: FC<Props> = ({ product, addToCart }) => {
+const ProductCard: FC<Props> = ({ product }) => {
   return (
     <div className="border rounded-lg p-4 shadow-lg">
       <Link href={`/products/${product.id}`}>
@@ -25,7 +25,10 @@ const ProductCard: FC<Props> = ({ product, addToCart }) => {
       </Link>
       <p className="text-gray-600">{product.price} kr</p>
       <button
-        onClick={() => addToCart(product)}
+        onClick={() => {
+          addToCart(product);
+          alert(`${product.name} har lagts i varukorgen!`);
+        }}
         className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
       >
         Lägg i varukorgen

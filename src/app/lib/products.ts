@@ -14,7 +14,7 @@ export const products: Product[] = [
     name: "Strandhatt",
     price: 199,
     image: "/images/hat.jpg",
-    description: "",
+    description: "En snygg skjorta perfekt för stranden.",
   },
   {
     id: 3,
