@@ -1,5 +1,5 @@
 // components/ProductCard.tsx
-"use client"; // 👈 Gör denna komponent till en klientkomponent
+"use client"; // Makes it a client component
 
 import { FC } from "react";
 import { Product } from "../types";
