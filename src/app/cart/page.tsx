@@ -1,14 +1,12 @@
-// app/cart/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { Product } from "../types";
-import { getCart, addToCart, removeFromCart, clearCart } from "../lib/cart";
-import { useRouter } from "next/navigation";
+import { getCart, addToCart, removeFromCart } from "../lib/cart";
+import Link from "next/link";
 
 export default function CartPage() {
   const [cart, setCart] = useState<Product[]>([]);
-  const router = useRouter();
 
   useEffect(() => {
     setCart(getCart());
@@ -22,12 +20,6 @@ export default function CartPage() {
   const handleDecrease = (productId: number) => {
     removeFromCart(productId);
     setCart(getCart());
-  };
-
-  const handleCheckout = () => {
-    clearCart();
-    alert("Tack för ditt köp!");
-    router.push("/");
   };
 
   const totalPrice = cart.reduce(
@@ -68,12 +60,12 @@ export default function CartPage() {
           </ul>
           <div className="mt-4 text-xl font-bold">Total: {totalPrice} kr</div>
           <div className="mt-4">
-            <button
-              onClick={handleCheckout}
+            <Link
+              href="/checkout"
               className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
             >
               Gå till kassan
-            </button>
+            </Link>
           </div>
         </>
       ) : (
