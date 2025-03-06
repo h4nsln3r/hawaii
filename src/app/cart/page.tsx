@@ -36,7 +36,7 @@ export default function CartPage() {
                 className="flex justify-between items-center border-b p-2"
               >
                 <span>
-                  {item.name} - {item.price} kr
+                  {item.name} - {item.price} kr (x{item.quantity})
                 </span>
                 <button
                   onClick={() => handleRemove(item.id)}
