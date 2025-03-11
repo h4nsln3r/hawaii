@@ -1,0 +1,8 @@
+
+1. Betalningslösning
+2. Backend? --> Riktiga produkter
+3. Translations
+4. Logo
+5. Kategorier --> Göra om webshoppen till en REsturang menu webshop där man kan bestäla grejer
+6. Lägga till riktiga rätter / menyn :)
+7. LÄgga till vilken bord man sitter på som init eller om man ska hämta take away som INIT
